@@ -1,0 +1,14 @@
+##数据库脚本
+##账户表
+CREATE TABLE `account` (
+  `accountID` int(11) NOT NULL AUTO_INCREMENT,
+  `accountName` varchar(20) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `nickName` varchar(30) DEFAULT NULL,
+  `sex` int(11) DEFAULT NULL,
+  `email` varchar(30) NOT NULL,
+  `mobile` varchar(20) DEFAULT NULL,
+  `registDate` datetime NOT NULL,
+  `lastActiveTime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`accountID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;

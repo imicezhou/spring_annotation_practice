@@ -110,7 +110,7 @@
     
   </dependencies>
   <build>
-    <finalName>A_Field</finalName>
+    <finalName>springmvcannotation</finalName>
     
     <plugins>
     	<plugin>
