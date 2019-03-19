@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
 import com.neo.a_field.service.AccountService;
 
 @Controller
@@ -26,7 +26,8 @@ public class AccountController {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		Object results = accountService.getAccountsByCriteriaWithPaging(params);
-		System.out.println("! ! ! ! \n"+results);
+		System.out.print("results is instanceof page ???? : ");
+		System.out.println(results.getClass().getName());
 		return JSONObject.toJSON(results);
 	} 
 }

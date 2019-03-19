@@ -4,7 +4,6 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import com.neo.a_field.config.BeansConfig;
 import com.neo.a_field.config.DataSourceConfig;
-import com.neo.a_field.config.FastJsonConverterConfig;
 import com.neo.a_field.config.RootConfig;
 import com.neo.a_field.config.ServletConfig;
 
@@ -17,7 +16,7 @@ public class MyAppInitializer extends AbstractAnnotationConfigDispatcherServletI
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {RootConfig.class,BeansConfig.class,DataSourceConfig.class,FastJsonConverterConfig.class};
+		return new Class[] {RootConfig.class,BeansConfig.class,DataSourceConfig.class};
 	}
 
 	@Override

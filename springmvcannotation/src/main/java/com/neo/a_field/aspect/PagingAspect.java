@@ -25,14 +25,14 @@ public class PagingAspect {
 	private final Integer defaultPageNum  = 1;
 	
 	/**
-	 * 只切方法名以 withPaging结尾的方法
+	 * 只切在包com.neo.a_field.service包下，方法名以 withPaging结尾的方法
 	 */
-	@Pointcut(value="execution(public * *withPaging(..))")
+	@Pointcut(value="execution(* *ByCriteriaWithPagingwithPaging(..))")
 	public void pointCut() {};
 	
 	@Around("pointCut()")
 	public Page<?> openPaging(JoinPoint joinPoint) throws Throwable {
-		
+		System.out.println("@@@@@@进入切面");
 		Integer pageSize = this.defaultPageSize;
 		Integer pageNum  = this.defaultPageNum;
 		
@@ -40,19 +40,19 @@ public class PagingAspect {
 		Object[] args = pJP.getArgs();
 		if(args.length>0) {
 			if(args[0] instanceof Map<?,?>) {
-				Map<?,?> params = (Map)args[0];
 				try {
-					if(params.containsKey("pageSize")) {
-						pageSize = (Integer) params.get("pageSize");
-					}
-					if(params.containsKey("pageNum")) {
-						pageNum = (Integer) params.get("pageNum");
-					}
+					    Map<?,?> params = (Map)args[0];
+					    if(params.containsKey("pageSize")) {
+					    	pageSize = (Integer) params.get("pageSize");
+					    }
+					    if(params.containsKey("pageNum")) {
+					    	pageNum = (Integer) params.get("pageNum");
+					    }
 					
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
+					}
+					catch(Exception e) {
+						throw new RuntimeException("获取分页参数时出错："+ e.getMessage());
+					}
 			}
 		}
 		//开启分页拦截
