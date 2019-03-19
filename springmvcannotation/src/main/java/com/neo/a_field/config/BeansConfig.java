@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import com.neo.a_field.bean.system.MysqlParams;
 
 /**
- * 
+ * 配置普通bean
  * @author Neo
  */
 @PropertySource(value={"classpath:configs/mysql.properties"})

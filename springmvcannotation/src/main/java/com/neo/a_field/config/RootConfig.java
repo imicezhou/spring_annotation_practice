@@ -13,10 +13,13 @@ import org.springframework.stereotype.Controller;
  *
  */
 @Configuration
-@EnableAspectJAutoProxy
-@ComponentScan(value= "com.neo.a_field",excludeFilters= {
-		@Filter(type=FilterType.ANNOTATION,classes= {Controller.class})
-})
+@EnableAspectJAutoProxy	//开启AOP
+@ComponentScan(
+				value= "com.neo.a_field",
+				excludeFilters= {
+									@Filter(type=FilterType.ANNOTATION,classes= {Controller.class})
+								}
+			  )
 public class RootConfig {
 
 }

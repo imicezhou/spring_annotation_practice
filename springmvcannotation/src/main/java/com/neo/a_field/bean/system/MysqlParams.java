@@ -2,6 +2,11 @@ package com.neo.a_field.bean.system;
 
 import org.springframework.beans.factory.annotation.Value;
 
+/**
+ * 存放连接mysql参数
+ * @author Neo
+ *
+ */
 public class MysqlParams {
 
 	public MysqlParams() {
@@ -151,11 +156,11 @@ public class MysqlParams {
 	}
 
 	public void init() {
-		System.out.println("MysqlParams init......");
+		//process after constructor excecute
 	}
 	
 	public void destroy() {
-		System.out.println("MysqlParams destroy......");
+		//process before servlet container destroy	
 	}
 	
 }

@@ -4,6 +4,11 @@ import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
+/**
+ * 账户表
+ * @author Neo
+ *
+ */
 public class Account {
 
 	@JSONField

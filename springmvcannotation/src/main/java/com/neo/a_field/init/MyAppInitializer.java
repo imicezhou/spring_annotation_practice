@@ -8,7 +8,11 @@ import com.neo.a_field.config.FastJsonConverterConfig;
 import com.neo.a_field.config.RootConfig;
 import com.neo.a_field.config.ServletConfig;
 
-
+/**
+ * 替代web.xml中对dispacher servlet的xml配置
+ * @author Neo
+ *
+ */
 public class MyAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override

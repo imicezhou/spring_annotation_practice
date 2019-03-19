@@ -27,8 +27,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.neo.a_field.bean.system.MysqlParams;
 
 /**
- * c
- * d
+ * 数据源配置
  * @author Neo
  * 
  */
@@ -96,7 +95,7 @@ public class DataSourceConfig {
 	}
 	
 	/**
-	 *  s
+	 *  事务管理器
 	 */
 	@Bean
 	public PlatformTransactionManager transactionManager(DataSource dataSource) {
@@ -105,7 +104,7 @@ public class DataSourceConfig {
 	
 	
 	/**
-	 * f
+	 * 分页插件
 	 */
 	@Bean
 	public PageHelper pageHelper() {
@@ -117,7 +116,7 @@ public class DataSourceConfig {
         properties.setProperty("params", "count=countSql");
         pageHelper.setProperties(properties);
 
-        //在sqlSessionFactory中加入pagehelper的拦截器
+        //在sqlSessionFactory中加入pagehelper的拦截器，否则插件不能起作用
         new SqlSessionFactoryBean().setPlugins(new Interceptor[] {new PageInterceptor()});
         
         return pageHelper;

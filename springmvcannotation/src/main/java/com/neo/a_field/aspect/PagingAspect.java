@@ -13,7 +13,7 @@ import com.github.pagehelper.PageHelper;
 
 
 /**
- * open开启分页的切面
+ * 开启分页的切面
  * @author Neo
  *
  */
@@ -24,6 +24,9 @@ public class PagingAspect {
 	
 	private final Integer defaultPageNum  = 1;
 	
+	/**
+	 * 只切方法名以 withPaging结尾的方法
+	 */
 	@Pointcut(value="execution(public * *withPaging(..))")
 	public void pointCut() {};
 	
@@ -52,8 +55,10 @@ public class PagingAspect {
 				}
 			}
 		}
+		//开启分页拦截
+		//PageHelper只能拦截第一条Mybatis的SQL语句
 		Page<Object> page = PageHelper.startPage(pageNum, pageSize);
-		Object obj = pJP.proceed();	//proceed返回的是list
+		Object obj = pJP.proceed();	//proceed() 得到的是dao返回的list
 		page.add(obj);
 		return page;
 	}
