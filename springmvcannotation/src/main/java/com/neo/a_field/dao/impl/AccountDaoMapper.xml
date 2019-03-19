@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neo.a_field.dao.AccountDao">
+	
+	<resultMap id="accountMapping" type="com.neo.a_field.bean.business.Account">
+		<id property="accountID" column="accountID" jdbcType="INTEGER" />
+		<result property="accountName" column="accountName" jdbcType="VARCHAR" />
+		<result property="password" column="password" jdbcType="VARCHAR" />
+		<result property="nickName" column="nickName" jdbcType="VARCHAR" />
+		<result property="sex" column="sex" jdbcType="INTEGER" />
+		<result property="email" column="email" jdbcType="VARCHAR" />
+		<result property="mobile" column="mobile" jdbcType="VARCHAR" />
+		<result property="registDate" column="registDate" javaType="java.util.Date" jdbcType="DATE" />
+		<result property="lastActiveTime" column="lastActiveTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<select id="queryAccountByCriteria" parameterType="Map" resultMap="accountMapping">
+		select * from account
+		<where>
+			<if test="accountID != null">
+				and accountID = #{accountID}
+			</if>
+			<if test="accountName != null">
+				and accountName = #{accountName}
+			</if>
+			<if test="email != null">
+				and email = #{email}
+			</if>
+			<if test="mobile != null">
+				and mobile = #{mobile}
+			</if>
+		</where>
+	</select>
+
+</mapper>
