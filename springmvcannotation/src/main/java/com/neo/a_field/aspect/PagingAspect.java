@@ -25,9 +25,9 @@ public class PagingAspect {
 	private final Integer defaultPageNum  = 1;
 	
 	/**
-	 * 只切在包com.neo.a_field.service包下，方法名以 withPaging结尾的方法
+	 * 只切方法名以 ByCriteriaWithPaging结尾的方法
 	 */
-	@Pointcut(value="execution(* *ByCriteriaWithPagingwithPaging(..))")
+	@Pointcut(value="execution(* *ByCriteriaWithPaging(..))")
 	public void pointCut() {};
 	
 	@Around("pointCut()")
