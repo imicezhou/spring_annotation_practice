@@ -1,7 +1,6 @@
 package com.neo.a_field.controller;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.neo.a_field.service.AccountService;
 
@@ -22,12 +22,10 @@ public class AccountController {
 	
 	@RequestMapping(value="/pageQuery",method=RequestMethod.GET)
 	@ResponseBody
-	public Object queryAccountWithPaging() {
-		
-		HashMap<String, Object> params = new HashMap<String, Object>();
+	public Object queryAccountWithPaging(Map<String,Object> params) {
 		
 		Object results = accountService.getAccountsByCriteriaWithPaging(params);
-		PageInfo pageInfo = new PageInfo((List)results);
+		PageInfo pageInfo = new PageInfo((Page)results);
 		return JSONObject.toJSON(pageInfo);
 	} 
 }
