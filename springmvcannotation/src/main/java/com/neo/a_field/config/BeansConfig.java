@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 
+import com.neo.a_field.aspect.PagingAspect;
 import com.neo.a_field.bean.system.MysqlParams;
 
 /**
@@ -21,4 +22,5 @@ public class BeansConfig {
 	public MysqlParams mysqlParams() {
 		return new MysqlParams();
 	}
+	
 }

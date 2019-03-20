@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -29,7 +28,6 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
  *
  */
 @Configuration
-@EnableAspectJAutoProxy	//开启AOP
 @ComponentScan(
 		       value="com.neo.a_field.controller",
 		       useDefaultFilters=false,		//禁用spring默认规则，否则自定义filter不生效

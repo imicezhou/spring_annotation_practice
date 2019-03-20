@@ -27,7 +27,7 @@ public class PagingAspect {
 	/**
 	 * 只切方法名以 ByCriteriaWithPaging结尾的方法
 	 */
-	@Pointcut(value="execution(* *ByCriteriaWithPaging(..))")
+	@Pointcut(value="execution(* com.neo.a_field.service..*(..))")
 	public void pointCut() {};
 	
 	@Around("pointCut()")
@@ -57,9 +57,9 @@ public class PagingAspect {
 		}
 		//开启分页拦截
 		//PageHelper只能拦截第一条Mybatis的SQL语句
-		Page<Object> page = PageHelper.startPage(pageNum, pageSize);
+		PageHelper.startPage(pageNum, pageSize);
 		Object obj = pJP.proceed();	//proceed() 得到的是dao返回的list
-		page.add(obj);
-		return page;
+		
+		return (Page)obj;
 	}
 }

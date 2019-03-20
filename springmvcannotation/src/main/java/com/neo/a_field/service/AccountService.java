@@ -3,13 +3,13 @@ package com.neo.a_field.service;
 import java.util.List;
 import java.util.Map;
 
+import com.neo.a_field.bean.business.Account;
 
-public abstract class AccountService implements PagingService {
+
+public interface AccountService {
 
 	
-	public List<Object> getAccountsByCriteriaWithPaging(Map<String,Object> criteria) {
-		return getPage(criteria);
-	}
+	public List<Account> getAccountsByCriteriaWithPaging(Map<String,Object> criteria) ;
 
 	
 }

@@ -10,9 +10,9 @@
 		<result property="nickName" column="nickName" jdbcType="VARCHAR" />
 		<result property="sex" column="sex" jdbcType="INTEGER" />
 		<result property="email" column="email" jdbcType="VARCHAR" />
-		<result property="mobile" column="mobile" jdbcType="VARCHAR" />
+		<!-- <result property="mobile" column="mobile" jdbcType="VARCHAR" /> -->
 		<result property="registDate" column="registDate" javaType="java.util.Date" jdbcType="DATE" />
-		<result property="lastActiveTime" column="lastActiveTime" jdbcType="TIMESTAMP" />
+		<!-- <result property="lastActiveTime" column="lastActiveTime" jdbcType="TIMESTAMP" /> -->
 	</resultMap>
 	
 	<select id="queryAccountByCriteria" parameterType="Map" resultMap="accountMapping">

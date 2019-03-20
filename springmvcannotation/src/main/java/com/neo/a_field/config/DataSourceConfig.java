@@ -6,7 +6,9 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.logging.log4j.Log4jImpl;
 import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -21,7 +23,6 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInterceptor;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.neo.a_field.bean.system.MysqlParams;
@@ -75,12 +76,26 @@ public class DataSourceConfig {
 	
 	/**
 	 * mybatis sqlsessionFactory
+	 * @throws Exception 
 	 */
 	@Bean
-	public SqlSessionFactoryBean sqlSessionFactory(@Autowired DataSource dataSource) {
-		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-		sqlSessionFactory.setDataSource(dataSource);
+	public SqlSessionFactory sqlSessionFactory(@Autowired DataSource dataSource) throws Exception {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setDataSource(dataSource);
 		
+		//PageHelper分页插件
+		PageInterceptor pageInterceptor = new PageInterceptor();
+		Properties p = new Properties();
+		p.setProperty("databaseType", "mysql");	//不可少的配置
+		pageInterceptor.setProperties(p);
+		sqlSessionFactoryBean.setPlugins(new Interceptor[] {pageInterceptor});
+		
+		//Mybatis打印SQL
+		org.apache.ibatis.session.Configuration mybatisGlobalConfig = new org.apache.ibatis.session.Configuration();
+		mybatisGlobalConfig.setLogImpl(Log4jImpl.class);	//指定mybatis日志的具体实现方式
+		sqlSessionFactoryBean.setConfiguration(mybatisGlobalConfig);
+		
+		//扫描mapping
 		PathMatchingResourcePatternResolver resourceResol = new PathMatchingResourcePatternResolver();
 		Resource[] resources = null;
 		try {
@@ -90,8 +105,8 @@ public class DataSourceConfig {
 			e.printStackTrace();
 		}
 		
-		sqlSessionFactory.setMapperLocations(resources);
-		return sqlSessionFactory;
+		sqlSessionFactoryBean.setMapperLocations(resources);
+		return sqlSessionFactoryBean.getObject();
 	}
 	
 	/**
@@ -102,23 +117,5 @@ public class DataSourceConfig {
 		return new DataSourceTransactionManager(dataSource);
 	}
 	
-	
-	/**
-	 * 分页插件
-	 */
-	@Bean
-	public PageHelper pageHelper() {
-		PageHelper pageHelper = new PageHelper();
-        Properties properties = new Properties();
-        properties.setProperty("reasonable", "true");
-        properties.setProperty("supportMethodsArguments", "true");
-        properties.setProperty("returnPageInfo", "check");
-        properties.setProperty("params", "count=countSql");
-        pageHelper.setProperties(properties);
-
-        //在sqlSessionFactory中加入pagehelper的拦截器，否则插件不能起作用
-        new SqlSessionFactoryBean().setPlugins(new Interceptor[] {new PageInterceptor()});
-        
-        return pageHelper;
-	}
+	 
 }
